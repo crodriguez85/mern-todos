@@ -27,5 +27,32 @@ router.route('/add').post((req, res) => {
 
 });
 
+router.route('/:id').get((req, res) => {
+    Task.findById(req.params.id)
+    .then(task => res.json(task))
+    .catch(error => res.status(400).json('Error: ' + error));
+});
+
+router.route('/:id').delete((req, res) => {
+    Task.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Exercise deleted'))
+    .catch(error => res.status(400).json('Error: ' + error));
+});
+
+router.route('/update/:id').post((req, res) => {
+    Task.findById(req.params.id)
+    .then(task => {
+        task.username = req.body.username;
+        task.description = req.body.description;
+        task.duration = req.body.duration;
+        task.date = Date.parse(req.body.date);
+
+        task.save()
+        .then(() => res.json('Exercise Updated'))
+        .catch(error => res.status(400).json('Error: ' + error))
+    })
+    .catch(error => res.status(400).json('Error: ' + error ))
+});
+
 
 module.exports = router;
