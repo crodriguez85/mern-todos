@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import tasksRouter from './routes/tasks';
+import usersRouter from './routes/users';
 require('dotenv').config();
 
 const app = express();
@@ -20,6 +22,10 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established succesfully");
 });
+
+// API Routes
+app.use('/tasks', tasksRouter);
+app.use('/users', usersRouter);
 
 app.listen(port, () => {
     console.log(`Server Started on localhost:${port}`);
