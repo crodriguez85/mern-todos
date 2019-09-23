@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-let User = '../models/user.model.js';
+import User from '../models/user.model';
 
 router.route('/').get((req, res) => {
     User.find()

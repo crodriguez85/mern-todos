@@ -9,5 +9,5 @@ const taskSchema = new Schema({
     timestamps: true
 })
 
-const Task = mongoose.model('task', userSchema);
+const Task = mongoose.model('task', taskSchema);
 module.exports =  Task;
